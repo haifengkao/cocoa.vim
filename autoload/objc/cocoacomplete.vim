@@ -62,7 +62,7 @@ fun s:GetCompleteType(lnum, col)
 	elseif current_scope == 'objcSuperclass'
 		return 'classes'
 	" Inside brackets "[ ... ]":
-	elseif index(scopelist, 'objcMessage') != -1
+	elseif index(scopelist, 'objcMethodCall') != -1
 		return beforeCursor =~ '\[\k*$' ? 'classes' : 'methods'
 	" Inside parentheses "( ... )":
 	elseif current_scope == 'cParen'
