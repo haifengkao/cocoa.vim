@@ -61,17 +61,17 @@ def format_function_line(line):
 def get_types(header_files):
     '''Returns a list of Cocoa Types.'''
     return match_output(r"grep -h 'typedef .* _*\(NS\|UI\)[A-Za-z]*' "
-                          + header_files, r'((NS|UI)[A-Za-z]+)\s*(;|{)', 1)
+                          + header_files, r'((NS|UI)[A-Za-z]+)\)?\s*(;|{)', 1)
 
 def get_constants(header_files):
     '''Returns a list of Cocoa Constants.'''
-    return match_output(r"awk '/^(typedef )?enum .*\{/ {pr = 1;} /\}/ {pr = 0;}"
+    return match_output(r"awk '/^(typedef )?(enum|NS_(ENUM|OPTIONS)\(.*\)) .*\{/ {pr = 1;} /\}/ {pr = 0;}"
                         r"{ if(pr) print $0; }' " + header_files,
                         r'^\s*((NS|UI)[A-Z][A-Za-z0-9_]*)', 1)
 
 def get_notifications(header_files):
     '''Returns a list of Cocoa Notifications.'''
-    return match_output(r"grep -h '\*\(NS\|UI\).*Notification' "
+    return match_output(r"egrep -h '\*(\s*const\s+)?\s*(NS|UI).*Notification' "
                         + header_files, r'(NS|UI)\w*Notification', 0)
 
 def write_file(filename, lines):
