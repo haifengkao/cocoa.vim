@@ -32,13 +32,13 @@ syn match objcMethodColon '\k\+\s*:' contained containedin=objcMethod
 " Don't match these groups in cParen "(...)"
 syn cluster cParenGroup add=objcMethodName,objcMethodArg,objcMethodColon
 " This fixes a bug with completion inside parens (e.g. if ([NSString ]))
-syn cluster cParenGroup remove=objcMessage
+syn cluster cParenGroup remove=objcMethodCall
 
 " Matches "bar" in "[NSObject bar]" or "bar" in "[[NSObject foo: baz] bar]",
 " but NOT "bar" in "[NSObject foo: bar]".
-syn match objcMessageName '\(\[\s*\k\+\s\+\|\]\s*\)\@<=\k*\s*\]'me=e-1 display contained containedin=objcMessage
+syn match objcMessageName '\(\[\s*\k\+\s\+\|\]\s*\)\@<=\k*\s*\]'me=e-1 display contained containedin=objcMethodCall
 " Matches "foo:" in "[NSObject foo: bar]" or "[[NSObject new] foo: bar]"
-syn match objcMessageColon '\(\_\S\+\_\s\+\)\@<=\k\+\s*:' display contained containedin=objcMessage
+syn match objcMessageColon '\(\_\S\+\_\s\+\)\@<=\k\+\s*:' display contained containedin=objcMethodCall
 
 " Don't match these in this strange group for edge cases...
 syn cluster cMultiGroup add=objcMessageColon,objcMessageName,objcMethodName,objcMethodArg,objcMethodColon
