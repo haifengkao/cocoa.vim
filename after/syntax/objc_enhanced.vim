@@ -28,7 +28,7 @@ syn match objcMethod '^\s*[-+]\s*\_.\{-}[\{;]'me=e-1 transparent contains=cParen
 " Matches "bar & foobar" in above
 syn match objcMethodArg ')\@<=\s*\k\+' contained containedin=objcMethod
 " Matches "foo:" & "and:" in above
-"syn match objcMethodName '\(^\s*[-+]\s*(\_[^)]*)\)\@<=\_\s*\_\k\+' contained containedin=objcMethod
+syn match objcMethodName '\(^\s*[-+]\s*(\_[^)]*)\)\@<=\_\s*\_\k\+' contained containedin=objcMethod
 syn match objcMethodColon '\k\+\s*:' contained containedin=objcMethod
 " Don't match these groups in cParen "(...)"
 syn cluster cParenGroup add=objcMethodName,objcMethodArg,objcMethodColon
@@ -48,10 +48,10 @@ syn cluster cMultiGroup add=objcMessageColon,objcMessageName,objcMethodName,objc
 " it, but you can modify your colorscheme to make this a different color.
 
 " HF: method name should not be attractive XD
-"hi link objcMethodName Special
+hi link objcMethodName Normal
 hi link objcMethodColon objcMethodName
 
-hi link objcMethodArg Identifier
+hi link objcMethodArg Statement
 
 hi link objcMessageName objcMethodArg
 hi link objcMessageColon objcMessageName
