@@ -20,15 +20,15 @@ syn region objcHeader start='@interface' end='@end' transparent
 " I make this typo sometimes so it's nice to have it highlighted.
 syn match objcError '\v(NSLogv=\(\s*)@<=[^@]=["'].*'me=e-1
 
-syn match objcSubclass '\(@implementation\|@interface\)\@<=\s*\k\+' display contained containedin=objcImp,objcHeader
-syn match objcSuperclass '\(@\(implementation\|interface\)\s*\k\+\s*:\)\@<=\s*\k*' display contained containedin=objcImp,objcHeader
+"syn match objcSubclass '\(@implementation\|@interface\)\@<=\s*\k\+' display contained containedin=objcImp,objcHeader
+"syn match objcSuperclass '\(@\(implementation\|interface\)\s*\k\+\s*:\)\@<=\s*\k*' display contained containedin=objcImp,objcHeader
 
 " Matches "- (void) foo: (int) bar and: (float) foobar"
 syn match objcMethod '^\s*[-+]\s*\_.\{-}[\{;]'me=e-1 transparent contains=cParen,objcInstMethod,objcFactMethod
 " Matches "bar & foobar" in above
 syn match objcMethodArg ')\@<=\s*\k\+' contained containedin=objcMethod
 " Matches "foo:" & "and:" in above
-syn match objcMethodName '\(^\s*[-+]\s*(\_[^)]*)\)\@<=\_\s*\_\k\+' contained containedin=objcMethod
+"syn match objcMethodName '\(^\s*[-+]\s*(\_[^)]*)\)\@<=\_\s*\_\k\+' contained containedin=objcMethod
 syn match objcMethodColon '\k\+\s*:' contained containedin=objcMethod
 " Don't match these groups in cParen "(...)"
 syn cluster cParenGroup add=objcMethodName,objcMethodArg,objcMethodColon
@@ -46,7 +46,9 @@ syn cluster cMultiGroup add=objcMessageColon,objcMessageName,objcMethodName,objc
 
 " You may want to customize this one. I couldn't find a default group to suit
 " it, but you can modify your colorscheme to make this a different color.
-hi link objcMethodName Special
+
+" HF: method name should not be attractive XD
+"hi link objcMethodName Special
 hi link objcMethodColon objcMethodName
 
 hi link objcMethodArg Identifier
@@ -54,7 +56,8 @@ hi link objcMethodArg Identifier
 hi link objcMessageName objcMethodArg
 hi link objcMessageColon objcMessageName
 
-hi link objcSubclass objcMethodName
-hi link objcSuperclass String
+" HF: let easytags handle it
+"hi link objcSubclass Identifier
+"hi link objcSuperclass String
 
 hi link objcError Error
