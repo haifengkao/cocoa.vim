@@ -51,9 +51,11 @@ syn cluster cMultiGroup add=objcMessageColon,objcMessageName,objcMethodName,objc
 hi link objcMethodName Normal
 hi link objcMethodColon objcMethodName
 
-hi link objcMethodArg Statement
+" HF: method declaration argument should not be attractive
+hi link objcMethodArg Normal
 
-hi link objcMessageName objcMethodArg
+" HF: method invocation name should be attractive
+hi link objcMessageName Statement
 hi link objcMessageColon objcMessageName
 
 " HF: let easytags handle it
